@@ -1,4 +1,6 @@
 
+PORT=8000
+
 # docker make; re-build container
 dmk(){
      docker build -t webloop .
@@ -7,10 +9,11 @@ dmk(){
 # docker up; docker shell
 dup(){
     docker run -ti --rm \
-        --volume="$PWD:/app/data:rw" \
+        -p "$PORT":"$PORT"
+        --volume="$PWD/data:/data:rw" \
         webloop /bin/bash
 }
 
 dsh(){
-    docker run -it webloop /bin/bash
+    docker run -p "$PORT":"$PORT" -it webloop /bin/bash
 }
