@@ -1,4 +1,5 @@
 #file
 *.sw?
 
-#dirs
+#dirsa
+app/
