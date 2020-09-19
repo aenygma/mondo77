@@ -15,5 +15,5 @@ dup(){
 }
 
 dsh(){
-    docker run -p "$PORT":"$PORT" -it webloop /bin/bash
+    docker run -p $PORT:$PORT -it webloop /bin/bash
 }
