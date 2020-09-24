@@ -26,30 +26,38 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="images/favicon.png">
 
+  <!-- wavesurfer.js -->
+  <script src="https://unpkg.com/wavesurfer.js/dist/wavesurfer.js"></script>
+
+  <!-- plugins -->
+  <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.timeline.js"></script>
+  <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.regions.js"></script>
+  <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.cursor.js"></script>
+
+  <script src="./js/index.js"></script>
 </head>
-<body>
+<body class="container">
 
-  <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class="container">
-    <h1>the titel</h1>
-    <div class="row">
-      <form>
-        <div class="ten columns">
-          <input class="u-full-width" type="url" placeholder="Enter YouTube url" id="urlInput">
-        </div>
-        <div class="two columns">
-          <input class="button-primary" type="submit" value="Submit">
-        </div>
-
-        <div class="twelve columns">
-          <pre id="canvas">
-            Stuff goes here
-          </pre>
-        </div>
-      </form>
-    </div>
+<!-- Primary Page Layout
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<div class="ten columns">
+  <h1>.</h1>
+  <div class="row">
+    <form action="/go" method="POST">
+      <div class="eleven columns">
+        <input class="u-full-width" type="url" placeholder="Enter YouTube url" name="urlInput" id="urlInput">
+      </div>
+      <div class="one columns">
+        <input class="button-primary" type="submit" value="Go">
+      </div>
+    </form>
   </div>
+  <hr style="margin: 3em"/>
+  <div class="row">
+    <div id="waveform"></div>
+  </div>
+
+</div>
 
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
