@@ -19,7 +19,7 @@ dmk(){
 drun(){
 
     # default
-    local cmd=
+    local cmd="python /app/main.py"
     local iactv=""
     local OUT=
 
