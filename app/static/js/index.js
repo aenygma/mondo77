@@ -31,10 +31,8 @@ class Player {
 
     // to maintain reference/scope for callbacks
     var self = this;
-
     // attach listeners
     this.ws.on('seek', self.selectionHandler.bind(self));
-
     return this.ws;
   }
 
@@ -82,20 +80,20 @@ function loadUrl(url){
 
   // Create a dom
   var newDom = document.createElement("div");
-  newDom.setAttribute('id', 'song'+songIndex);
-  newDom.setAttribute('class', 'song');
-  document.getElementById("waveformlist").appendChild(newDom);
+  newDom.setAttribute('id', 'track'+trackIndex);
+  newDom.setAttribute('class', 'track');
+  document.getElementById("tracklist").appendChild(newDom);
 
   // Make a player
   // Player code
   var p = new Player('#'+newDom.id);
   p.load(url);
-  //songs.push(p)
-  songs[newDom.id] = p;
+  //tracks.push(p)
+  tracks[newDom.id] = p;
 
 
-  // increment song index
-  songIndex += 1;
+  // increment track index
+  trackIndex += 1;
 }
 
 class Clock {
@@ -157,8 +155,8 @@ function showError(msg){
 
 // Globals
 var state = "none"
-var songIndex = 0
-var songs = {};
+var trackIndex = 0
+var tracks = {};
 
 document.addEventListener('DOMContentLoaded', function() {
   console.log("loaded");
