@@ -17,7 +17,15 @@ class Player {
       audioRate: true,
       cursorColor: 'navy',
       plugins: [
-        WaveSurfer.cursor.create()
+        //WaveSurfer.cursor.create(),
+        WaveSurfer.regions.create({
+          regions: [{
+            id: 0,
+            start: 1.55,
+            end: 2.55,
+            loop: true
+          }]
+        })
       ]
     });
 
@@ -25,7 +33,7 @@ class Player {
     var self = this;
 
     // attach listeners
-    this.ws.on('seek', this.selectionHandler);
+    this.ws.on('seek', self.selectionHandler.bind(self));
     
 
     // TODO: remove 
@@ -36,12 +44,26 @@ class Player {
 
   // Listeners
   selectionHandler(position){
+    /*
+     * The behavior for this is bit tricky so I'm adopting
+     *  dbl-click => start of loop
+     *  single-clikc => end of loop
+     */
 
+    //  // if position is same as previously recorded,
+    //  // then its a START position
+    //  if (self.selRegion == postion){
+    //    var start = position;
+    //  }
+    //  // or 1 click and its to the right of previously
+    //  else if(position > self.selRegion){
 
-    // if selected is right of previous
-    if (self.selRegion > postion){
-      
-    }
+    //  }
+
+    //  // set 
+    var self = this;
+    self.selRegion = position;
+
     var currentTime = position * self.ws.getDuration();
     console.log("selected: " + currentTime);
   } 
@@ -51,14 +73,11 @@ class Player {
 var s0 = 0, s1 = 0;
 
 
-
-
-
-
-
 // Main
+var p
 document.addEventListener('DOMContentLoaded', function() {
-  var p = new Player()
+  console.log("loaded");
+  p = new Player();
 
 });
 

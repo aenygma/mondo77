@@ -15,7 +15,7 @@ from YDL import ydl
 # for static files
 @route('/js/<path:path>')
 def callback(path):
-    return static_file(path, root="./static/")
+    return static_file(path, root="./static/js")
 
 @route('/css/<path:path>')
 def callback(path):

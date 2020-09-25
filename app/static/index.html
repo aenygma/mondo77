@@ -27,14 +27,15 @@
   <link rel="icon" type="image/png" href="images/favicon.png">
 
   <!-- wavesurfer.js -->
-  <script src="https://unpkg.com/wavesurfer.js/dist/wavesurfer.js"></script>
+  <script src="js/wavesurfer.js"></script>
 
   <!-- plugins -->
-  <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.timeline.js"></script>
-  <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.regions.js"></script>
-  <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.cursor.js"></script>
+  <script src="js/wavesurfer.timeline.js"></script>
+  <script src="js/wavesurfer.regions.js"></script>
+  <script src="js/wavesurfer.minimap.js"></script>
 
-  <script src="./js/index.js"></script>
+
+  <script src="js/index.js"></script>
 </head>
 <body class="container">
 
@@ -52,9 +53,9 @@
       </div>
     </form>
   </div>
-  <hr style="margin: 3em"/>
+  <hr style="margin: 3em; width:80%" class="u-full-width"/>
   <div class="row">
-    <div id="waveform"></div>
+    <div id="waveform" class="eleven columns"></div>
   </div>
 
 </div>
