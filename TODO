@@ -1,0 +1,46 @@
+* Add metronome track
+
+* Create region flow
+
+New Sample -> configure endpoints
+              * play looping
+              
+
+
+
+Big Picture Org
+* Clock obj
+- global timer
+- everything sync'd from here.
+
+* Sequence
+- list of things to play in sequence
+- list of track regions and tracks
+- should be opt, default should be "free run" mode
+
+
+* Track/s objs
+- need hooks to be triggered by Clock
+- need to have 
+- show list of regions
+- show track info
+
+- Create a new Track
+- add regions to it
+- list regions
+
+Tech needs:
+- JS 
+ * ajax, validators, dom
+- Layout
+ * CSS, tables, templates
+ * (grid)
+ * Animation/Collapse irrelevant/non-contextual info
+
+- XSRF
+ * cookie for d/l'ing YT abuse
+
+Blue Sky:
+* can you marshall an entire project into json and send it to someone else?
+ * ala play the whole thing?
+
