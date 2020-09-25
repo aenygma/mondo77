@@ -34,8 +34,35 @@
   <script src="js/wavesurfer.regions.js"></script>
   <script src="js/wavesurfer.minimap.js"></script>
 
-
   <script src="js/index.js"></script>
+  <style>
+  body hr {
+    margin: 1.8em;
+    width: 80%;
+  }
+  #errorbox {
+    background-color: #ffabab;
+    padding: 0.2em;
+    margin: 0.8em;
+    display: none;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+  }
+  .song{
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+  }
+  /*from http://youmightnotneedjquery.com/ */
+  .show {
+    transition: opacity 400ms;
+  }
+  .hide {
+    opacity: 0;
+  }
+  </style>
+
 </head>
 <body class="container">
 
@@ -44,20 +71,35 @@
 <div class="ten columns">
   <h1>.</h1>
   <div class="row">
-    <form action="/go" method="POST">
+    <form id="mainform">
       <div class="eleven columns">
         <input class="u-full-width" type="url" placeholder="Enter YouTube url" name="urlInput" id="urlInput">
       </div>
       <div class="one columns">
-        <input class="button-primary" type="submit" value="Go">
+        <input class="button-primary" type="submit" value="Add" id="addsong">
       </div>
     </form>
   </div>
-  <hr style="margin: 3em; width:80%" class="u-full-width"/>
-  <div class="row">
-    <div id="waveform" class="eleven columns"></div>
-  </div>
+  <div class="row" id="errorbox"></div>
+  <div class="row" id="timebox">
+    <!--label for="clocktime" style="font-size: 1em">Time:</label-->
+    <div class="two columns" id="clocktime" style="font-size: 2em">
+      <div id="minutes" class="u-pull-left">00</div>
+      <div class="u-pull-left">:</div>
+      <div id="seconds" class="u-pull-left">00</div>
+    </div>
 
+    <!--label for="clockbeat" style="font-size: 1em">Beat:</label-->
+    <div class="two columns" id="clockbeat" style="font-size: 2em">
+      <div id="topbeat" class="u-pull-left">0</div>
+      <div class="u-pull-left">/</div>
+      <div id="bottombeat" class="u-pull-left">4</div>
+    </div> 
+  </div>
+  <hr/>
+  <div class="row">
+    <div id="waveformlist" class="eleven columns"></div>
+  </div>
 </div>
 
 <!-- End Document

@@ -34,11 +34,7 @@ class Player {
 
     // attach listeners
     this.ws.on('seek', self.selectionHandler.bind(self));
-    
 
-    // TODO: remove 
-    //this.ws.load("/audio/blah.mp3");
-    this.ws.load("http://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3");
     return this.ws;
   }
 
@@ -60,26 +56,153 @@ class Player {
 
     //  }
 
-    //  // set 
+    //  // set
     var self = this;
     self.selRegion = position;
 
     var currentTime = position * self.ws.getDuration();
     console.log("selected: " + currentTime);
-  } 
+  }
+
+  load(url){
+  /*
+   * Load the given url
+   */
+    var self = this;
+    this.ws.load(url);
+  }
+
 };
 
-// the boundary time of the  clip
-var s0 = 0, s1 = 0;
+// Load a given URL of a clip
+function loadUrl(url){
 
 
+  // send serv request -> on return ....
+
+  // Create a dom
+  var newDom = document.createElement("div");
+  newDom.setAttribute('id', 'song'+songIndex);
+  newDom.setAttribute('class', 'song');
+  document.getElementById("waveformlist").appendChild(newDom);
+
+  // Make a player
+  // Player code
+  var p = new Player('#'+newDom.id);
+  p.load(url);
+  //songs.push(p)
+  songs[newDom.id] = p;
+
+
+  // increment song index
+  songIndex += 1;
+}
+
+class Clock {
+
+  sec = 0;
+  listeners = {
+    'fire':[]
+  };
+
+  constructor(){
+
+    setInterval(function(){
+      this.listeners['fire'].forEach(
+        function(item,idx){
+          item();
+        })
+    }, 1000);
+  }
+
+  // Listeners
+  addListener(name, func){
+    var self = this;
+    var evt_listeners = self.listeners[name];
+    if (!evt_listeners){
+      evt_listeners = [func]
+    }
+    evt_listeners.push(func)
+  }
+}
+
+// calculate time
+function displayTime(){
+  // display clock when running
+  // from: https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript
+
+  var sec = 0;
+  function pad ( val ) { return val > 9 ? val : "0" + val; }
+  setInterval( function(){
+      document.getElementById("seconds").innerHTML = (pad(++sec%60));
+      document.getElementById("minutes").innerHTML = (pad(parseInt(sec/60,10)));
+  }, 1000);
+
+}
+
+
+
+// show error box
+function showError(msg){
+  var err = document.getElementById("errorbox")
+  err.innerHTML = "Error: " + msg;
+  err.setAttribute("style", "display:block");
+}
+
+
+
+//
 // Main
-var p
+//
+
+// Globals
+var state = "none"
+var songIndex = 0
+var songs = {};
+
 document.addEventListener('DOMContentLoaded', function() {
   console.log("loaded");
-  p = new Player();
 
+  // Attach listener to Add button
+  var form = document.getElementById("mainform");
+  form.addEventListener('submit',
+    function (evt) {
+
+      // get url
+      // TODO: validate url
+      var url = document.getElementById('urlInput').value;
+
+      // make server request
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "/get_media", true);
+
+      // set headers
+      xhr.setRequestHeader("Content-Type", "application/json");
+      // listener for loading data
+      xhr.onreadystatechange = function() { // Call a function when the state changes.
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+          // Request finished. Do processing here.
+
+          var data = JSON.parse(xhr.responseText);
+          console.log(data);
+          state = data
+          if(data["status"] != "success"){
+            showError(data);
+            return false;
+          }
+
+          // load the audio file into waveform onscreen
+          loadUrl(data.data);
+        }
+      }
+
+      // Make request
+      xhr.send("urlInput="+url);
+
+      // prevent form submit
+      evt.preventDefault();
+      return false;
+    });
 });
-
 
 
