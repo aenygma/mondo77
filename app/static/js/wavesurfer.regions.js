@@ -646,6 +646,9 @@ var Region = /*#__PURE__*/function () {
       }
     }
 
+    //TODO: edited and added
+    this.handlers = [];
+
     this.formatTimeCallback = params.formatTimeCallback;
     this.edgeScrollWidth = params.edgeScrollWidth;
     this.bindInOut();
@@ -744,8 +747,16 @@ var Region = /*#__PURE__*/function () {
   }, {
     key: "playLoop",
     value: function playLoop(start) {
-      this.loop = true;
-      this.play(start);
+        const s = start || this.start;
+        this.wavesurfer.play(s);
+        this.once('out', () => {
+            console.log("out")
+            return this.playLoop();
+            //const realTime = this.wavesurfer.getCurrentTime();
+            //if (realTime >= this.start && realTime <= this.end) {
+            //    return this.playLoop();
+            //}
+        });
     }
     /**
      * Set looping on/off.
