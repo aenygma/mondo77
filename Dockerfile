@@ -2,7 +2,7 @@ FROM python:rc-slim-buster
 
 RUN apt update && apt install -y build-essential ffmpeg
 RUN apt install -y libxml2-dev libxml2 zlib1g-dev zlibc libxslt1-dev libxslt1.1
-RUN apt install -y python-gevent vim-tiny
+RUN apt install -y python-gevent vim-tiny xattr
 RUN pip install youtube-dl
 RUN pip install bottle bs4 lxml gevent
 
